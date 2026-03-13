@@ -29,11 +29,11 @@ jobs:
             docker rm my-app || true
 
             # Pobierz najnowszy obraz
-            docker pull ghcr.io/${{ github.repository_owner }}/my-first_cicd:latest
+            docker pull ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]'):latest
 
             # Uruchom kontener na porcie studenta
             docker run -d \
               --name my-app \
               --restart unless-stopped \
               -p 8${{ secrets.VPS_PORT_NUMBER }}:80 \
-              ghcr.io/${{ github.repository_owner }}/my-first_cicd:latest
+              ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]'):latest
